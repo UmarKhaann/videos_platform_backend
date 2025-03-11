@@ -1,13 +1,13 @@
-import asyncHandler from "../../utils/asyncHandler.js";
-import User from "../../models/user.model.js";
-import ApiResponse from "../../utils/ApiResponse.js";
+import asyncHandler from "../../../utils/asyncHandler.js";
+import User from "../../../models/user.model.js";
+import ApiResponse from "../../../utils/apiResponse.js"
 
 const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
     {
-      $set: {
-        refreshToken: undefined,
+      $unset: {
+        refreshToken: 1,
       },
     },
     {
